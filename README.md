@@ -1,4 +1,4 @@
-## Typtscript project setup
+## Typescript project setup
 
 ### https://khalilstemmler.com/blogs/typescript/node-starter-project/
 
