@@ -141,6 +141,10 @@ function for_each(fun, items) {
   }
 }
 
+function is_pair(item) {
+  return length(item) === 2
+}
+
 console.log(for_each(x => display(x), list(57, 321, 88)))
 console.log(map(x => x * x, list(1, 2, 3, 4)))
 console.log(brooks_curried(list(brooks_curried,
@@ -161,3 +165,8 @@ exports.head = head
 exports.tail = tail
 exports.list = list
 exports.length = length
+exports.map = map
+exports.list_ref = list_ref
+exports.append = append
+exports.is_null = is_null
+exports.is_pair = is_pair
