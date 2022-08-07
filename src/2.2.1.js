@@ -141,7 +141,7 @@ function for_each(fun, items) {
   }
 }
 
-console.log(for_each(x => display(x), list(57, 321, 88)))
+console.log(for_each(x => console.log(x), list(57, 321, 88)))
 console.log(map(x => x * x, list(1, 2, 3, 4)))
 console.log(brooks_curried(list(brooks_curried,
   list(plus_curried, 3, 4))))

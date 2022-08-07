@@ -142,18 +142,18 @@ function for_each(fun, items) {
 }
 
 function is_pair(item) {
-  return length(item) === 2
+  return item instanceof Array
 }
 
-console.log(for_each(x => display(x), list(57, 321, 88)))
-console.log(map(x => x * x, list(1, 2, 3, 4)))
-console.log(brooks_curried(list(brooks_curried,
-  list(plus_curried, 3, 4))))
+//console.log(for_each(x => console.log(x), list(57, 321, 88)))
+//console.log(map(x => x * x, list(1, 2, 3, 4)))
+//console.log(brooks_curried(list(brooks_curried,
+//list(plus_curried, 3, 4))))
 
-const odds = list(1, 3, 5, 7)
-const squares = list(1, 4, 9, 16, 25)
-console.log(list_ref(squares, 3))
-console.log(length(odds))
+//const odds = list(1, 3, 5, 7)
+//const squares = list(1, 4, 9, 16, 25)
+//console.log(list_ref(squares, 3))
+//console.log(length(odds))
 
 //console.log(list(1, 2, 3))
 //const alist = list(1, 2, 4);
@@ -170,3 +170,5 @@ exports.list_ref = list_ref
 exports.append = append
 exports.is_null = is_null
 exports.is_pair = is_pair
+exports.append = append
+exports.reverse = reverse
