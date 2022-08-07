@@ -17,6 +17,21 @@ function list(...args) {
   }
 }
 
+function display(list) {
+  let arr = []
+  if (is_null(list)) {
+    return arr
+  } else {
+    if (!is_pair(head(list))) {
+      arr.push(head(list))
+      return arr.concat(display(tail(list)))
+    } else {
+      arr.push(display(head(list)))
+      return arr.concat(display(tail(list)))
+    }
+  }
+}
+
 function list_ref(items, n) {
   if (n === 0) {
     return head(items)
@@ -172,3 +187,4 @@ exports.is_null = is_null
 exports.is_pair = is_pair
 exports.append = append
 exports.reverse = reverse
+exports.display = display
