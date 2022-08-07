@@ -1,5 +1,5 @@
 const { reverse, append, pair, tail, head, length, list, list_ref, is_null, map, is_pair } = require("./advanced_primitives")
-const { fringe, deep_reverse, left_branch, right_branch, branch_length, branch_structure, total_weight, make_branch, make_mobile, is_balanced } = require("./2.2.2")
+const { fringe, deep_reverse, left_branch, right_branch, branch_length, branch_structure, total_weight, make_branch, make_mobile, is_balanced, square_tree, square_tree1, tree_map, subsets } = require("./2.2.2")
 describe('Code', function () {
   it('Pair', function () {
     const z = list(list(1, 2), list(3, 4))
@@ -31,5 +31,19 @@ describe('Code', function () {
     expect(total_weight(m)).toBe(10)
     expect(is_balanced(m)).toStrictEqual(true)
     expect(is_balanced(m1)).toStrictEqual(false)
+  })
+  it('Map and Trees', function () {
+    expect(square_tree(list(1,
+      list(2, list(3, 4), 5),
+      list(6, 7)))).toStrictEqual(list(1, list(4, list(9, 16), 25), list(36, 49)))
+    expect(square_tree1(list(1,
+      list(2, list(3, 4), 5),
+      list(6, 7)))).toStrictEqual(list(1, list(4, list(9, 16), 25), list(36, 49)))
+    expect(subsets(list(1, 2))).toStrictEqual(list(null, list(2), list(1), list(1, 2)))
+    expect(subsets(list(1, 2, 3))).toStrictEqual(
+      list(null, list(3), list(2), list(2, 3),
+        list(1), list(1, 3), list(1, 2),
+        list(1, 2, 3))
+    )
   })
 })

@@ -96,6 +96,37 @@ function scale_tree(tree, factor) {
         scale_tree(tail(tree), factor));
 }
 
+function scale_tree1(tree, factor) {
+  return map(sub_tree => is_pair(sub_tree)
+    ? scale_tree1(sub_tree, factor)
+    : sub_tree * factor,
+    tree);
+}
+
+const square = x => x ** 2
+
+function square_tree(tree) {
+  return map(sub_tree => is_pair(sub_tree) ? square_tree(sub_tree, square(sub_tree)) :
+    square(sub_tree), tree)
+}
+
+function square_tree1(tree) { return tree_map(tree, square); }
+
+function tree_map(tree, fun) {
+  return map(sub_tree => is_pair(sub_tree)
+    ? tree_map(sub_tree, fun)
+    : fun(sub_tree), tree)
+}
+
+function subsets(s) {
+  if (is_null(s)) {
+    return list(null);
+  } else {
+    const rest = subsets(tail(s));
+    return append(rest, map(x => append(list(head(s)), x), rest));
+  }
+}
+
 const z = pair(list(1, 2), list(3, 4))
 const x = list(1, 2, 3)
 const y = list(4, 5, 6)
@@ -121,3 +152,7 @@ exports.total_weight = total_weight
 exports.make_branch = make_branch
 exports.make_mobile = make_mobile
 exports.is_balanced = is_balanced
+exports.square_tree = square_tree
+exports.square_tree1 = square_tree1
+exports.tree_map = tree_map
+exports.subsets = subsets
