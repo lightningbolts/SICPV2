@@ -17,6 +17,10 @@ function list(...args) {
   }
 }
 
+function error(s) {
+  console.error(s)
+}
+
 function display(list) {
   let arr = []
   if (is_null(list)) {
@@ -160,6 +164,10 @@ function is_pair(item) {
   return item instanceof Array
 }
 
+function is_undefined(item) {
+  return typeof item === "undefined"
+}
+
 //console.log(for_each(x => console.log(x), list(57, 321, 88)))
 //console.log(map(x => x * x, list(1, 2, 3, 4)))
 //console.log(brooks_curried(list(brooks_curried,
@@ -188,3 +196,5 @@ exports.is_pair = is_pair
 exports.append = append
 exports.reverse = reverse
 exports.display = display
+exports.error = error
+exports.is_undefined = is_undefined
