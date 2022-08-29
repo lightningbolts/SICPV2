@@ -168,6 +168,15 @@ function is_undefined(item) {
   return typeof item === "undefined"
 }
 
+function set_tail(list1, list2) {
+  list1[1] = list2
+}
+
+//args is a list
+function apply_in_underlying_javascript(fun, args) {
+  return map(fun, args)
+}
+
 //console.log(for_each(x => console.log(x), list(57, 321, 88)))
 //console.log(map(x => x * x, list(1, 2, 3, 4)))
 //console.log(brooks_curried(list(brooks_curried,
@@ -198,3 +207,5 @@ exports.reverse = reverse
 exports.display = display
 exports.error = error
 exports.is_undefined = is_undefined
+exports.set_tail = set_tail
+exports.apply_in_underlying_javascript = apply_in_underlying_javascript
