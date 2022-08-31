@@ -1,5 +1,5 @@
 const { reverse, append, pair, tail, head, length, list, list_ref, is_null, map, is_pair, is_undefined, error, set_tail, display } = require("./advanced_primitives")
-const { mul, div, add, sub, make_javascript_number, make_polynomial, make_term, is_equal_to_zero } = require("./2.5.3")
+const { mul, div, add, sub, make_javascript_number, make_polynomial, make_term, is_equal_to_zero_poly } = require("./2.5.3")
 describe('Code', function () {
   it('Stuff', function () {
     const p1 = make_polynomial("x",
@@ -25,8 +25,8 @@ describe('Code', function () {
         make_term(0, make_javascript_number(-3)))))
     const p3 = make_polynomial("x",
       list(make_term(0, make_javascript_number(0))))
-    //expect(is_equal_to_zero(p2)).toStrictEqual(false)
-    //expect(is_equal_to_zero(p3)).toStrictEqual(true)
+    expect(is_equal_to_zero_poly(p2)).toStrictEqual(false)
+    expect(is_equal_to_zero_poly(p3)).toStrictEqual(true)
 
     expect(add(p3, p2)).toStrictEqual(p2)
     // let t1 = make_term(1, make_javascript_number(5))

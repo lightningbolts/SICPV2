@@ -145,6 +145,10 @@ function is_equal_to_zero(x) {
   return apply_generic("is_equal_to_zero", list(x));
 }
 
+function is_equal_to_zero_poly(x) {
+  return apply_generic("is_equal_to_zero_poly", list(x))
+}
+
 function install_polynomial_package() {
 
   // internal functions
@@ -217,22 +221,22 @@ function install_polynomial_package() {
     return 2 * x
   }
 
-  // function zero_all_terms(L) {
-  //   //console.log(L, "sdkfsdljfsldkfjlsdkjdlkhgdflihgosdihgildhs")
-  //   if (is_empty_termlist(term_list)) {
-  //     return true
-  //   } else if (coeff(first_term(L)) !== 0) {
-  //     //console.log(coeff(first_term(L)), "fsidjfsdjflsdkjs")
-  //     return false
-  //   } else {
-  //     return zero_all_terms(rest_terms(L))
-  //   }
-  // }
+  function zero_all_terms(L) {
+    console.log(L, "sdkfsdljfsldkfjlsdkjdlkhgdflihgosdihgildhs")
+    if (is_empty_termlist(L)) {
+      return true
+    } else if (tail(coeff(first_term(L))) !== 0) {
+      console.log(coeff(first_term(L)), "fsidjfsdjflsdkjs")
+      return false
+    } else {
+      return zero_all_terms(rest_terms(L))
+    }
+  }
 
-  // function is_equal_to_zero(p) {
-  //   console.log(p, "jlsdfjlsdkjflksdjf")
-  //   return zero_all_terms(term_list(p))
-  // }
+  function is_equal_to_zero_poly(p) {
+    //console.log(p, "jlsdfjlsdkjflksdjf")
+    return zero_all_terms(term_list(p))
+  }
 
   function negate_term(t) {
     let new_num = -tail(coeff(t))
@@ -289,6 +293,8 @@ function install_polynomial_package() {
     (p1, p2) => tag(mul_poly(p1, p2)));
   put("sub", list("polynomial", "polynomial"),
     (p1, p2) => tag(sub_poly(p1, p2)))
+  put("is_equal_to_zero_poly", list("polynomial"),
+    p => is_equal_to_zero_poly(p))
   put("make", "polynomial",
     (variable, terms) =>
       tag(make_poly(variable, terms)));
@@ -323,4 +329,4 @@ exports.mul = mul
 exports.div = div
 exports.add = add
 exports.sub = sub
-exports.is_equal_to_zero = is_equal_to_zero
+exports.is_equal_to_zero_poly = is_equal_to_zero_poly
