@@ -177,6 +177,29 @@ function apply_in_underlying_javascript(fun, args) {
   return map(fun, args)
 }
 
+function add(x, y) {
+  if (x === 0) {
+    return y
+  } else if (y === 0) {
+    return x
+  } else {
+    return add(x + 1, y - 1)
+  }
+}
+
+function sub(x, y) {
+  if (x === 0) {
+    return -y
+  } else if (y === 0) {
+    return x
+  } else {
+    return sub(x - 1, y - 1)
+  }
+}
+
+//console.log(add(4, 3))
+//console.log(sub(3, 4))
+
 //console.log(for_each(x => console.log(x), list(57, 321, 88)))
 //console.log(map(x => x * x, list(1, 2, 3, 4)))
 //console.log(brooks_curried(list(brooks_curried,

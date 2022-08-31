@@ -1,5 +1,6 @@
 const { reverse, append, pair, tail, head, length, list, list_ref, is_null, map, is_pair, is_undefined, error, set_tail, display } = require("./advanced_primitives")
-const { equal, member } = require("./2.3.1")
+const { equal, member } = require("./2.3.1");
+const { fineStructureDependencies } = require("mathjs");
 function apply(fun, args) {
   return apply_in_underlying_javascript(fun, args);
 }
@@ -110,6 +111,8 @@ function install_javascript_number_package() {
     (x, y) => tag(x * y));
   put("div", list("javascript_number", "javascript_number"),
     (x, y) => tag(x / y));
+  put("is_equal_to_zero", list("javscript_number"),
+    (x) => tag(is_equal_to_zero(x)))
   put("make", "javascript_number",
     x => tag(x));
   return "done";
@@ -210,6 +213,44 @@ function install_polynomial_package() {
     }
   }
 
+  function double(x) {
+    return 2 * x
+  }
+
+  // function zero_all_terms(L) {
+  //   //console.log(L, "sdkfsdljfsldkfjlsdkjdlkhgdflihgosdihgildhs")
+  //   if (is_empty_termlist(term_list)) {
+  //     return true
+  //   } else if (coeff(first_term(L)) !== 0) {
+  //     //console.log(coeff(first_term(L)), "fsidjfsdjflsdkjs")
+  //     return false
+  //   } else {
+  //     return zero_all_terms(rest_terms(L))
+  //   }
+  // }
+
+  // function is_equal_to_zero(p) {
+  //   console.log(p, "jlsdfjlsdkjflksdjf")
+  //   return zero_all_terms(term_list(p))
+  // }
+
+  function negate_term(t) {
+    let new_num = -tail(coeff(t))
+    return make_term(order(t), make_javascript_number(new_num))
+  }
+
+  function negate_poly(p) {
+    return tail(make_polynomial("x", map(negate_term, tail(p))))
+  }
+
+  function sub_poly(p1, p2) {
+    return add_poly(p1, negate_poly(p2))
+  }
+
+  // function sub_terms(L1, L2) {
+  //   return add_terms(L1, negate_poly(L2));
+  // }
+
   function mul_poly(p1, p2) {
     return is_same_variable(variable(p1), variable(p2))
       ? make_poly(variable(p1),
@@ -246,6 +287,8 @@ function install_polynomial_package() {
     (p1, p2) => tag(add_poly(p1, p2)));
   put("mul", list("polynomial", "polynomial"),
     (p1, p2) => tag(mul_poly(p1, p2)));
+  put("sub", list("polynomial", "polynomial"),
+    (p1, p2) => tag(sub_poly(p1, p2)))
   put("make", "polynomial",
     (variable, terms) =>
       tag(make_poly(variable, terms)));
@@ -270,8 +313,9 @@ const p2 = make_polynomial("x",
     make_term(1, make_javascript_number(2)),
     make_term(0, make_javascript_number(10))));
 
-console.log(mul(p1, p2));
-
+//console.log(mul(p1, p2));
+//console.log(make_javascript_number(5))
+//console.log(make_polynomial("x", list(make_term(1, make_javascript_number(5)))).toString())
 exports.make_polynomial = make_polynomial
 exports.make_term = make_term
 exports.make_javascript_number = make_javascript_number
@@ -279,3 +323,4 @@ exports.mul = mul
 exports.div = div
 exports.add = add
 exports.sub = sub
+exports.is_equal_to_zero = is_equal_to_zero
